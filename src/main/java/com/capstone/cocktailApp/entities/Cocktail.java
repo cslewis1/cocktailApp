@@ -15,16 +15,12 @@ public class Cocktail {
 
     @Column(unique = true)
     private String cocktailName;
-
     @Column
     private String ingredients;
-
     @Column
     private String glassType;
-
     @Column
     private String directions;
-
     @Column
     private String imgURL;
 
