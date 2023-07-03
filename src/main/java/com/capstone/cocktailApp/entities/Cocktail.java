@@ -1,5 +1,6 @@
 package com.capstone.cocktailApp.entities;
 
+import com.capstone.cocktailApp.dtos.CocktailDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -27,6 +28,9 @@ public class Cocktail {
     @OneToMany(mappedBy = "cocktail", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonManagedReference
     private Set<Favorite> favoriteSetCocktail = new HashSet<>();
+
+    public Cocktail(CocktailDto cocktailDto) {
+    }
 
 
     public Long getCocktailID() {
@@ -87,5 +91,8 @@ public class Cocktail {
         this.glassType = glassType;
         this.directions = directions;
         this.imgURL = imgURL;
+    }
+
+    public void setUser(User user) {
     }
 }
