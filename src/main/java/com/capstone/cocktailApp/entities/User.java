@@ -12,7 +12,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userID;
+    private Long user_id;
 
     @Column(unique = true)
     private String username;
@@ -22,17 +22,23 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonManagedReference
-    private Set<Favorite> favoriteSetUser = new HashSet<>();
+    private Set<Favorite> favoriteSet = new HashSet<>();
 
     public User(UserDto userDto) {
+        if (userDto.getUsername() != null){
+            this.username = userDto.getUsername();
+        }
+        if (userDto.getPassword() != null){
+            this.password = userDto.getPassword();
+        }
     }
 
     public Long getUserID() {
-        return userID;
+        return user_id;
     }
 
     public void setUserID(Long userID) {
-        this.userID = userID;
+        this.user_id = userID;
     }
 
     public String getUsername() {
@@ -54,8 +60,8 @@ public class User {
     public User() {
     }
 
-    public User(Long userID, String username, String password) {
-        this.userID = userID;
+    public User(Long user_id, String username, String password) {
+        this.user_id = user_id;
         this.username = username;
         this.password = password;
     }

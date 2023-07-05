@@ -1,20 +1,18 @@
 package com.capstone.cocktailApp.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Favorites")
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long favoriteID;
-
-    @Column(unique = true)
-    private Long cocktailID;
-
-    @Column
-    private Long userID;
+    private Long favorite_id;
 
     @Column
     private String notes;
@@ -23,32 +21,16 @@ public class Favorite {
     @JsonBackReference
     private User user;
 
-    @ManyToOne
-    @JsonBackReference
-    private Cocktail cocktail;
+    @OneToMany(mappedBy = "favorite", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonManagedReference
+    private Set<Cocktail> cocktailSet = new HashSet<>();
 
     public Long getFavoriteID() {
-        return favoriteID;
+        return favorite_id;
     }
 
     public void setFavoriteID(Long favoriteID) {
-        this.favoriteID = favoriteID;
-    }
-
-    public Long getCocktailID() {
-        return cocktailID;
-    }
-
-    public void setCocktailID(Long cocktailID) {
-        this.cocktailID = cocktailID;
-    }
-
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
+        this.favorite_id = favorite_id;
     }
 
     public String getNotes() {
@@ -62,10 +44,8 @@ public class Favorite {
     public Favorite() {
     }
 
-    public Favorite(Long favoriteID, Long cocktailID, Long userID, String notes) {
-        this.favoriteID = favoriteID;
-        this.cocktailID = cocktailID;
-        this.userID = userID;
+    public Favorite(Long favoriteID, String notes) {
+        this.favorite_id = favoriteID;
         this.notes = notes;
     }
 }

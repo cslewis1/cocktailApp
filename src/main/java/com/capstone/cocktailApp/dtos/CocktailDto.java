@@ -20,7 +20,7 @@ public class CocktailDto implements Serializable {
     private String glassType;
     private String directions;
     private String imgURL;
-    private Set<FavoriteDto> cocktailFavoriteDtoSet = new HashSet<>();
+    private FavoriteDto favoriteDto;
 
     public CocktailDto(Cocktail cocktail){
         if(cocktail.getCocktailID() != null){

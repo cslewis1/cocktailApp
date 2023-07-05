@@ -1,6 +1,7 @@
 package com.capstone.cocktailApp.entities;
 
 import com.capstone.cocktailApp.dtos.CocktailDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 public class Cocktail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cocktailID;
+    private Long cocktail_id;
 
     @Column(unique = true)
     private String cocktailName;
@@ -25,20 +26,19 @@ public class Cocktail {
     @Column
     private String imgURL;
 
-    @OneToMany(mappedBy = "cocktail", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference
-    private Set<Favorite> favoriteSetCocktail = new HashSet<>();
+    @ManyToOne
+    @JsonBackReference
+    private Favorite favorite;
 
     public Cocktail(CocktailDto cocktailDto) {
     }
 
-
     public Long getCocktailID() {
-        return cocktailID;
+        return cocktail_id;
     }
 
     public void setCocktailID(Long cocktailID) {
-        this.cocktailID = cocktailID;
+        this.cocktail_id = cocktailID;
     }
 
     public String getCocktailName() {
@@ -85,7 +85,7 @@ public class Cocktail {
     }
 
     public Cocktail(Long cocktailID, String cocktailName, String ingredients, String glassType, String directions, String imgURL) {
-        this.cocktailID = cocktailID;
+        this.cocktail_id = cocktailID;
         this.cocktailName = cocktailName;
         this.ingredients = ingredients;
         this.glassType = glassType;
