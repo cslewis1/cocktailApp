@@ -21,9 +21,14 @@ public class Favorite {
     @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy = "favorite", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference
-    private Set<Cocktail> cocktailSet = new HashSet<>();
+    @ManyToOne
+    @JsonBackReference
+    private Cocktail cocktail;
+
+//    @OneToMany(mappedBy = "favorite", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JsonManagedReference
+//    @ManyToMany(mappedBy = "favorite")
+//    private Set<Cocktail> cocktailSet = new HashSet<>();
 
     public Long getFavoriteID() {
         return favorite_id;

@@ -1,6 +1,7 @@
 package com.capstone.cocktailApp.entities;
 
 import com.capstone.cocktailApp.dtos.CocktailDto;
+import com.capstone.cocktailApp.dtos.FavoriteDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -14,7 +15,6 @@ public class Cocktail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cocktail_id;
-
     @Column(unique = true)
     private String cocktailName;
     @Column
@@ -28,17 +28,40 @@ public class Cocktail {
 
     @ManyToOne
     @JsonBackReference
-    private Favorite favorite;
+    private User user;
 
-    public Cocktail(CocktailDto cocktailDto) {
+    @ManyToMany
+    @JoinTable(name="favorite_cocktail", joinColumns = @JoinColumn(name = "cocktail_id"),
+            inverseJoinColumns = @JoinColumn(name = "favorite_id"))
+    private Set<Favorite> favoriteSet = new HashSet<>();
+
+    public Cocktail(CocktailDto cocktailDto){
+        if(cocktailDto.getCocktailID() != null){
+            this.cocktail_id = cocktailDto.getCocktailID();
+        }
+        if(cocktailDto.getCocktailName() != null){
+            this.cocktailName = cocktailDto.getCocktailName();
+        }
+        if(cocktailDto.getIngredients() != null){
+            this.ingredients = cocktailDto.getIngredients();
+        }
+        if(cocktailDto.getGlassType() != null){
+            this.glassType = cocktailDto.getGlassType();
+        }
+        if(cocktailDto.getDirections() != null){
+            this.directions = cocktailDto.getDirections();
+        }
+        if(cocktailDto.getImgURL() != null){
+            this.imgURL = cocktailDto.getImgURL();
+        }
     }
 
     public Long getCocktailID() {
         return cocktail_id;
     }
 
-    public void setCocktailID(Long cocktailID) {
-        this.cocktail_id = cocktailID;
+    public void setCocktailID(Long cocktail_id) {
+        this.cocktail_id = cocktail_id;
     }
 
     public String getCocktailName() {
@@ -80,12 +103,25 @@ public class Cocktail {
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
     }
+    @Override
+    public String toString() {
+        return "Cocktail{" +
+                "cocktail_id=" + cocktail_id +
+                ", cocktailName='" + cocktailName + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                ", glassType='" + glassType + '\'' +
+                ", directions='" + directions + '\'' +
+                ", imgURL='" + imgURL + '\'' +
+                ", user=" + user +
+                ", favoriteSet=" + favoriteSet +
+                '}';
+    }
 
     public Cocktail() {
     }
 
-    public Cocktail(Long cocktailID, String cocktailName, String ingredients, String glassType, String directions, String imgURL) {
-        this.cocktail_id = cocktailID;
+    public Cocktail(Long cocktail_id, String cocktailName, String ingredients, String glassType, String directions, String imgURL) {
+        this.cocktail_id = cocktail_id;
         this.cocktailName = cocktailName;
         this.ingredients = ingredients;
         this.glassType = glassType;

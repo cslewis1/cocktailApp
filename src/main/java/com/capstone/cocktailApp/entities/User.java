@@ -22,7 +22,12 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonManagedReference
+    private Set<Cocktail> cocktailSet = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonManagedReference
     private Set<Favorite> favoriteSet = new HashSet<>();
+
 
     public User(UserDto userDto) {
         if (userDto.getUsername() != null){

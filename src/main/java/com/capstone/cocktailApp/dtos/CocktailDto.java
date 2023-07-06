@@ -14,17 +14,18 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CocktailDto implements Serializable {
-    private Long cocktailID;
+    private Long cocktail_id;
     private String cocktailName;
     private String ingredients;
     private String glassType;
     private String directions;
     private String imgURL;
     private FavoriteDto favoriteDto;
+    private UserDto userDto;
 
     public CocktailDto(Cocktail cocktail){
         if(cocktail.getCocktailID() != null){
-            this.cocktailID = cocktail.getCocktailID();
+            this.cocktail_id = cocktail.getCocktailID();
         }
         if(cocktail.getCocktailName() != null){
             this.cocktailName = cocktail.getCocktailName();
@@ -41,5 +42,9 @@ public class CocktailDto implements Serializable {
         if(cocktail.getImgURL() != null){
             this.imgURL = cocktail.getImgURL();
         }
+    }
+
+    public Long getCocktailID() {
+        return cocktail_id;
     }
 }
