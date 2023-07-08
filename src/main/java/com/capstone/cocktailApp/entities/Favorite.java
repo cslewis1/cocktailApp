@@ -1,5 +1,6 @@
 package com.capstone.cocktailApp.entities;
 
+import com.capstone.cocktailApp.dtos.FavoriteDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -21,21 +22,25 @@ public class Favorite {
     @JsonBackReference
     private User user;
 
-    @ManyToOne
-    @JsonBackReference
-    private Cocktail cocktail;
+//    @ManyToOne
+//    @JsonBackReference
+//    private Cocktail cocktail;
+
+    public Favorite(FavoriteDto favoriteDto) {
+    }
 
 //    @OneToMany(mappedBy = "favorite", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    @JsonManagedReference
 //    @ManyToMany(mappedBy = "favorite")
-//    private Set<Cocktail> cocktailSet = new HashSet<>();
+//
+    @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private Set<Cocktail> cocktails = new HashSet<>();
 
     public Long getFavoriteID() {
         return favorite_id;
     }
 
-    public void setFavoriteID(Long favoriteID) {
-        this.favorite_id = favorite_id;
+    public void setFavoriteID(Long favoriteID) { this.favorite_id = favorite_id;
     }
 
     public String getNotes() {
@@ -52,5 +57,8 @@ public class Favorite {
     public Favorite(Long favoriteID, String notes) {
         this.favorite_id = favoriteID;
         this.notes = notes;
+    }
+
+    public void setUser(User user) {
     }
 }

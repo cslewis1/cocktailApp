@@ -12,9 +12,10 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long user_id;
 
-    @Column(unique = true)
+    @Column(name= "username", unique = true)
     private String username;
 
     @Column

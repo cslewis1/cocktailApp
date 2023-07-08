@@ -1,16 +1,16 @@
 package com.capstone.cocktailApp.entities;
 
 import com.capstone.cocktailApp.dtos.CocktailDto;
-import com.capstone.cocktailApp.dtos.FavoriteDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "Cocktails")
+@Data
 public class Cocktail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,10 @@ public class Cocktail {
     private User user;
 
     @ManyToMany
-    @JoinTable(name="favorite_cocktail", joinColumns = @JoinColumn(name = "cocktail_id"),
+    @JoinTable(name="favorite_cocktail",
+            joinColumns = @JoinColumn(name = "cocktail_id"),
             inverseJoinColumns = @JoinColumn(name = "favorite_id"))
-    private Set<Favorite> favoriteSet = new HashSet<>();
+    private Set<Favorite> favorites = new HashSet<>();
 
     public Cocktail(CocktailDto cocktailDto){
         if(cocktailDto.getCocktailID() != null){
@@ -113,7 +114,7 @@ public class Cocktail {
                 ", directions='" + directions + '\'' +
                 ", imgURL='" + imgURL + '\'' +
                 ", user=" + user +
-                ", favoriteSet=" + favoriteSet +
+                ", favorites=" + favorites +
                 '}';
     }
 
@@ -129,6 +130,4 @@ public class Cocktail {
         this.imgURL = imgURL;
     }
 
-    public void setUser(User user) {
-    }
 }

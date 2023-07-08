@@ -24,23 +24,12 @@ public class CocktailServiceImpl implements CocktailService {
     @Autowired
     private CocktailRepository cocktailRepository;
 
-//    @Override
-//    @Transactional
-//    public void addCocktail(CocktailDto cocktailDto, Long userId){
-//        Optional<User> userOptional = userRepository.findById(userId);
-//        if(userOptional.isPresent()){
-//            User user = userOptional.get();
-//            Cocktail cocktail = new Cocktail(cocktailDto);
-//            cocktail.setUser(user);
-//            cocktailRepository.saveAndFlush(cocktail);
-//        }
-//    }
-
     @Override
     @Transactional
     public void addCocktail(CocktailDto cocktailDto, Long userId){
         Optional<User> userOptional = userRepository.findById(userId);
         Cocktail cocktail = new Cocktail(cocktailDto);
+//        System.out.println(userOptional.get().getUserID());
         userOptional.ifPresent(cocktail::setUser);
         cocktailRepository.saveAndFlush(cocktail);
     }
@@ -76,6 +65,11 @@ public class CocktailServiceImpl implements CocktailService {
         return Collections.emptyList();
     }
 
+    @Override
+   public List<Cocktail> getAllCocktails(){
+       List<Cocktail> allCocktails = cocktailRepository.findAll();
+       return allCocktails;
+   }
     @Override
     public Optional<CocktailDto> getCocktailById(Long cocktailId) {
         Optional<Cocktail> cocktailOptional = cocktailRepository.findById(cocktailId);
