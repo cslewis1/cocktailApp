@@ -40,8 +40,9 @@ public class CocktailController {
         return cocktailService.getCocktailById(cocktailId);
     }
 
-    @GetMapping
-    public List<Cocktail> getAllCocktails(){
+    @GetMapping("/allCocktails")
+    public List<CocktailDto> getAllCocktails() {
         return cocktailService.getAllCocktails();
     }
+
 }

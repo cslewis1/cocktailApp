@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -70,5 +71,14 @@ public class User {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
+    }
+
+
+    public Set<Favorite> getFavorites() {
+        return favoriteSet;
+    }
+
+    public void setFavorite(Set<Favorite> favoriteSet) {
+        this.favoriteSet = favoriteSet;
     }
 }

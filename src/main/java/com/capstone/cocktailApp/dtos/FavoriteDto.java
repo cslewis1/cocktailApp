@@ -1,14 +1,23 @@
 package com.capstone.cocktailApp.dtos;
 
 import com.capstone.cocktailApp.entities.Favorite;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FavoriteDto {
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class FavoriteDto implements Serializable {
     private Long favorite_id;
     private String notes;
     private UserDto userDto;
+    private CocktailDto cocktailDto;
     private Set<CocktailDto> cocktailDtoSet = new HashSet<>();
 
     public FavoriteDto(Favorite favorite){
@@ -19,4 +28,9 @@ public class FavoriteDto {
             this.notes = favorite.getNotes();
         }
     }
+
+    public Long getFavoriteID() {
+        return favorite_id;
+    }
+
 }

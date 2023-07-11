@@ -4,12 +4,15 @@ import com.capstone.cocktailApp.dtos.FavoriteDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Favorites")
+@Data
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,20 +23,18 @@ public class Favorite {
 
     @ManyToOne
     @JsonBackReference
+    @JoinColumn(name = "user_id")
     private User user;
-
-//    @ManyToOne
-//    @JsonBackReference
-//    private Cocktail cocktail;
 
     public Favorite(FavoriteDto favoriteDto) {
     }
 
-//    @OneToMany(mappedBy = "favorite", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JsonManagedReference
-//    @ManyToMany(mappedBy = "favorite")
-//
-    @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+ //    @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+
+    @ManyToMany
+    @JoinTable(name="favorite_cocktail",
+            joinColumns = @JoinColumn(name = "favorite_id"),
+            inverseJoinColumns = @JoinColumn(name = "cocktail_id"))
     private Set<Cocktail> cocktails = new HashSet<>();
 
     public Long getFavoriteID() {
@@ -59,6 +60,19 @@ public class Favorite {
         this.notes = notes;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Cocktail> getCocktails() {
+        return cocktails;
+    }
+
+
+    public void setCocktail(Cocktail cocktail) {
     }
 }

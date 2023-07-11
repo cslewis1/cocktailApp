@@ -24,9 +24,10 @@ public class CocktailServiceImpl implements CocktailService {
     @Autowired
     private CocktailRepository cocktailRepository;
 
+    //Method allows users to add a cocktail to the app
     @Override
     @Transactional
-    public void addCocktail(CocktailDto cocktailDto, Long userId){
+    public void addCocktail(CocktailDto cocktailDto, Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
         Cocktail cocktail = new Cocktail(cocktailDto);
 //        System.out.println(userOptional.get().getUserID());
@@ -36,14 +37,14 @@ public class CocktailServiceImpl implements CocktailService {
 
     @Override
     @Transactional
-    public void deleteCocktailById(Long cocktailId){
+    public void deleteCocktailById(Long cocktailId) {
         Optional<Cocktail> cocktailOptional = cocktailRepository.findById(cocktailId);
         cocktailOptional.ifPresent(cocktail -> cocktailRepository.delete(cocktail));
     }
 
     @Override
     @Transactional
-    public void updateCocktailById(CocktailDto cocktailDto){
+    public void updateCocktailById(CocktailDto cocktailDto) {
         Optional<Cocktail> cocktailOptional = cocktailRepository.findById(cocktailDto.getCocktailID());
         cocktailOptional.ifPresent(cocktail -> {
             cocktail.setCocktailName(cocktailDto.getCocktailName());
@@ -56,20 +57,25 @@ public class CocktailServiceImpl implements CocktailService {
     }
 
     @Override
-    public List<CocktailDto> getAllCocktailsByUserId(Long userId){
+    public List<CocktailDto> getAllCocktailsByUserId(Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
-        if(userOptional.isPresent()){
+        if (userOptional.isPresent()) {
             List<Cocktail> cocktailList = cocktailRepository.findAllByUserEquals(userOptional.get());
             return cocktailList.stream().map(cocktail -> new CocktailDto(cocktail)).collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
 
-    @Override
-   public List<Cocktail> getAllCocktails(){
-       List<Cocktail> allCocktails = cocktailRepository.findAll();
-       return allCocktails;
-   }
+    public List<CocktailDto> getAllCocktails() {
+        List<Cocktail> cocktails = cocktailRepository.findAll();
+        if(!cocktails.isEmpty()) {
+            return cocktails.stream()
+                    .map(cocktail -> new CocktailDto(cocktail))
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
+
     @Override
     public Optional<CocktailDto> getCocktailById(Long cocktailId) {
         Optional<Cocktail> cocktailOptional = cocktailRepository.findById(cocktailId);

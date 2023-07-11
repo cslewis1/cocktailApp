@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 public interface CocktailRepository extends JpaRepository<Cocktail, Long> {
     List<Cocktail> findAllByUserEquals(User user);
-
-    List<Cocktail> getAll();
 }
