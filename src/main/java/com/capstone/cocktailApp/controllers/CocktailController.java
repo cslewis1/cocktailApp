@@ -1,7 +1,6 @@
 package com.capstone.cocktailApp.controllers;
 
 import com.capstone.cocktailApp.dtos.CocktailDto;
-import com.capstone.cocktailApp.entities.Cocktail;
 import com.capstone.cocktailApp.services.CocktailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

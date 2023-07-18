@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.crypto.spec.OAEPParameterSpec;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +59,16 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new RuntimeException("User or Cocktail not found");
         }
     }
+
+//    @Override
+//    public List<FavoriteDto> getAllFavoritesByUserId(Long userId) {
+//        Optional<User> userOptional = userRepository.findById(userId);
+//        if (userOptional.isPresent()) {
+//            List<Favorite> favoritesList = favoriteRepository.findAllBy UserEquals(userOptional.get());
+//            return favoritesList.stream().map(favorite -> new FavoriteDto(favoriteccs)).collect(Collectors.toList());
+//        }
+//        return Collections.emptyList();
+//    }
 
 
     @Override

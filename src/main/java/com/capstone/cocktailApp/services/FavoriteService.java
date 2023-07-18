@@ -1,5 +1,6 @@
 package com.capstone.cocktailApp.services;
 
+import com.capstone.cocktailApp.dtos.CocktailDto;
 import com.capstone.cocktailApp.dtos.FavoriteDto;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,4 +20,6 @@ public interface FavoriteService {
     Optional<FavoriteDto> getFavoriteById(Long favoriteId);
 
     List<FavoriteDto> getAllFavorite();
+
+//    List<CocktailDto> getAllFavoritesByUserId(Long userId);
 }

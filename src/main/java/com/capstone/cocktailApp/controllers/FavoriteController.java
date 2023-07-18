@@ -31,6 +31,11 @@ public class FavoriteController {
         favoriteService.updateFavorite(favoriteDto);
     }
 
+//    @GetMapping("/user/{userId}")
+//    public List<CocktailDto> getFavoritesByUser(@PathVariable Long userId){
+//        return favoriteService.getAllFavoritesByUserId(userId);
+//    }
+
     @GetMapping("/{favoriteId}")
     public Optional<FavoriteDto> getFavoriteById(@PathVariable Long favoriteId){
         return favoriteService.getFavoriteById(favoriteId);

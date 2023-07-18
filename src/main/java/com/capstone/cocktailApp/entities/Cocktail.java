@@ -15,15 +15,20 @@ public class Cocktail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cocktail_id;
-    @Column(unique = true)
+
+    @Column(length = 300)
     private String cocktailName;
-    @Column
+
+    @Column(length = 2000)
     private String ingredients;
-    @Column
+
+    @Column(length = 300)
     private String glassType;
-    @Column
+
+    @Column(length = 2000)
     private String directions;
-    @Column
+
+    @Column(length = 2000)
     private String imgURL;
 
     @ManyToOne
@@ -132,5 +137,4 @@ public class Cocktail {
         this.directions = directions;
         this.imgURL = imgURL;
     }
-
 }
