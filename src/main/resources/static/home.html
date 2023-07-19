@@ -14,49 +14,40 @@
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <title>Home</title>
 </head>
+
 <body>
 <div class="container d-flex flex-column">
-<!--    <nav class="navbar navbar-light bg-light">-->
-<!--        <ul>-->
-<!--            <a class="navbar-brand" href="#">Sip & Savor</a>-->
-<!--            <a href="./home.html">Home</a>-->
-<!--            <a href="">Cocktail Recipes</a>-->
-<!--            <a href="./register.html">Register</a>-->
-<!--        </ul>-->
-<!--    </nav>-->
     <div class="container">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <img src="http://clipartmag.com/images/martini-glass-logo-17.png" height="70" alt=""
-                 loading="lazy"/>
-            <h3 class="nav-title">Sip & Savor</h3>
-            <button class="navbar-toggler ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-                    aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <img src="http://clipartmag.com/images/martini-glass-logo-17.png" height="70" alt=""
+                     loading="lazy"/>
+                <h3 class="nav-title">Sip & Savor</h3>
+                <button class="navbar-toggler ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+                        aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon d-flex justify-content-start align-items-center">
         <i class="fas fa-bars"></i>
       </span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarExample01">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="cocktail.html">Cocktails</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./login.html">Login/Register</a>
-                    </li>
-                </ul>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarExample01">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="./login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="./cocktail.html">Add Cocktail</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     </div>
 
-<!--    <div class="vh-50" id="home-main-image">-->
-<!--        -->
-<!--    </div>-->
+    <div class="container d-flex" style="height: 50vh; width:auto;">
+        <img src="images/shaker.jpg" class="img-fluid" alt="cocktail shaker">
+    </div>
 
-    <img src="https://pixabay.com/photos/brandy-cognac-alcohol-drink-402572/" alt="Responsive image">
-
-    <div class="container d-flex flex-column align-items-center justify-content-center">
+    <div class="container d-flex flex-column">
         <h2>Cocktail Recipes</h2>
         <div id="all-cocktails-container" class="container d-flex flex-column"></div>
     </div>

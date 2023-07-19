@@ -38,12 +38,6 @@ public class Cocktail {
     @ManyToMany(mappedBy = "cocktails", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Favorite> favorites = new HashSet<>();
 
-//    @ManyToMany
-//    @JoinTable(name="favorite_cocktail",
-//            joinColumns = @JoinColumn(name = "cocktail_id"),
-//            inverseJoinColumns = @JoinColumn(name = "favorite_id"))
-//    private Set<Favorite> favorites = new HashSet<>();
-
     public Cocktail(CocktailDto cocktailDto){
         if(cocktailDto.getCocktailID() != null){
             this.cocktail_id = cocktailDto.getCocktailID();

@@ -8,16 +8,6 @@ const headers = {
 
 const baseUrl = "http://localhost:8080/api/v1/cocktails/"
 
-//async function getAllCocktails() {
-//        await fetch(`${baseUrl}allCocktails`, {
-//            method: "GET",
-//            headers: headers
-//        })
-//            .then(response => response.json())
-//            .then(data => createRecipeCards(data))
-//            .catch(err => console.error(err))
-//    }
-
 async function getAllCocktails() {
   try {
     const response = await fetch(`${baseUrl}allCocktails`, {
@@ -38,25 +28,27 @@ const isLoggedIn = (userId) => {
   return userId !== null && userId !== undefined;
 };
 
-
  const createRecipeCards = (array, isLoggedIn) => {
         allCocktailsContainer.innerHTML = ''
         array.forEach(obj => {
             let recipeCard = document.createElement("div")
             recipeCard.classList.add("m-2")
             recipeCard.innerHTML = `
-                <div class="card d-flex" style="width: 80%; height: available">
+            <div class="card d-flex flex-row" style="width: 100%; height: available;">
+                <div class="card d-flex" style="width: 30%; height: 100%;">
+                     <img src=${obj.imgURL}, class="img-fluid" alt="cocktail shaker">
+                </div>
                     <div class="card-body d-flex flex-column  justify-content-between" style="height: available">
                         <h2 class="card-title" id="cocktailName">${obj.cocktailName}</h2><br>
-                        <h4 class="card-title" id="cocktailGlass">Cocktail Glass</h4>
-                        <p class="card-text">${obj.cocktailGlass}</p>
+                        <h4 class="card-title" id="glassType">Cocktail Glass</h4>
+                        <p class="card-text">${obj.glassType}</p>
                         <h4 class="text-title" id="ingredients">Ingredients</h4>
                         <p class="card-text">${obj.ingredients}</p>
                         <h4 class="text-title" id="directions">Directions</h4>
                         <p class="card-text">${obj.directions}</p>
-                         ${userId ? '<button class="btn btn-primary" onclick="addToFavorites(\'' + obj.id + '\')">Add to Favorites</button>' : ''}
                     </div>
                 </div>
+            </div>
             `
             allCocktailsContainer.append(recipeCard);
         })

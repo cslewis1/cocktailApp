@@ -29,7 +29,6 @@ const handleSubmit = async (e) =>{
         document.cookie = `userId=${responseArr[1]}`
         window.location.replace(responseArr[0])
     }
-    else(alert("Please correct username or password or register to create an account."))
 }
 
 loginForm.addEventListener("submit", handleSubmit)
